@@ -25,7 +25,7 @@ History of this document versions:
    1.0.1    |30/09/2015  | Russian translation by I. Panchenko and  O. Bartunov
    2.0      |10/12/2019  | Update by the PGGTIE              
    2.0.1    |08/06/2020  | Removed DINSIC mention
-   3.0.0    |09/11/2021  | English version and licence change
+   3.0.0    |09/11/2021  | English version and license change
 
 <!---
    Version  | Date       | Comments                       
@@ -69,7 +69,7 @@ This document is released under the ([PostgreSQL license](https://opensource.org
 Introduction
 ============
 
-This guide was produced within the framework of the « Ayrault » circular of September 19, 2012 on the use of free software in the French administration, which led to the creation of the inter-ministerial « Socle Interministériel du Logiciel Libre » (SILL). This guide presents the implementation of PostgreSQL compared to commercial solutions. Its objective is to answer the questions of project owners and project managers for the implementation of PostgreSQL as a replacement for a commercial solution. This guide aims, without going too deep into the details of the technical implementation, to demonstrate the benefits of PostgreSQL by describing the integration, security and robustness mechanisms.
+This guide was produced within the framework of the "Ayrault" circular of September 19, 2012 on the use of free software in the French administration, which led to the creation of the inter-ministerial "Socle Interministériel du Logiciel Libre" (SILL). This guide presents the implementation of PostgreSQL compared to commercial solutions. Its objective is to answer the questions of project owners and project managers for the implementation of PostgreSQL as a replacement for a commercial solution. This guide aims, without going too deep into the details of the technical implementation, to demonstrate the benefits of PostgreSQL by describing the integration, security and robustness mechanisms.
 
 The initial document was authored collaboratively by Mimprod[^1] and PGGTIE[^2].
 
@@ -85,7 +85,7 @@ PostgreSQL is an SQL compliant database management system, typically used in tra
 
 There is a PostgreSQL extension for geographic objects (PostGIS[^3]) that conforms to the Open Geospatial Consortium (OGC) Standards. It supports JSON format data, consisting of key-value pairs, allowing it to also satisfy the use cases of NoSQL-like solutions. PostgreSQL can also be used in the field of Business Intelligence as a data warehouse, in conjunction with reporting tools (BusinessObjects, Pentaho, etc). It comes with a built-in and feature rich full-text search engine[^4].
 
-Many free software packages are natively based on PostgreSQL (document management systems (DMS), rules engines, collaboration software, supervision software, etc). More and more software vendors are supporting PostgreSQL. Open letters, like this one written by the PGGTIE [^5] , could also help in adoption.
+Many free software packages are natively based on PostgreSQL (document management systems (DMS), rules engines, collaboration software, supervision software, etc). More and more software vendors are supporting PostgreSQL. Open letters, like this one written by the PGGTIE[^5], could also help in adoption.
 
 PostgreSQL also supports background processing, such as batch or deferred processing.
 
@@ -99,20 +99,20 @@ Security requirements
 
 PostgreSQL meets security needs in terms of availability, integrity, confidentiality and traceability (information security[^7]).
 
-Encryption is standard and several strong authentication methods (like SCRAM and Kerberos) are possible. Cryptographic requirements are covered by additional modules, in particular _pgcrypto_ [^8]. At present, it is not possible to encrypt an entire instance, but work is ongoing (see wiki on Transparent Data Encryption [^8.5]).
+Encryption is standard and several strong authentication methods (like SCRAM and Kerberos) are possible. Cryptographic requirements are covered by additional modules, in particular _pgcrypto_[^8]. At present, it is not possible to encrypt an entire instance, but work is ongoing (see wiki on Transparent Data Encryption[^8.5]).
 
-PostgreSQL has a very responsive community that provides security patches and manages component obsolescence. It is recommended that you apply minor patches as soon as possible. A major version is released every year and supported [^9] for 5 years.
+PostgreSQL has a very responsive community that provides security patches and manages component obsolescence. It is recommended that you apply minor patches as soon as possible. A major version is released every year and supported[^9] for 5 years.
 
-PostgreSQL guarantees the integrity of the data handled even in the event of an incident by respecting the properties of atomicity, consistency, isolation and durability (ACID [^10]).
+PostgreSQL guarantees the integrity of the data handled even in the event of an incident by respecting the properties of atomicity, consistency, isolation and durability (ACID[^10]).
 
-PostgreSQL natively offers the mechanisms to meet confidentiality and rights management needs through roles [^11]. Very fine granularity can be achieved, even at the row level (Row Security Policies [^12]).
+PostgreSQL natively offers the mechanisms to meet confidentiality and rights management needs through roles[^11]. Very fine granularity can be achieved, even at the row level (Row Security Policies[^12]).
 
 Migration cases
 ---------------
 
 The migration of a system represents a significant cost, consisting mainly of:
 
-- data migration, even if there are a number of tools to perform this migration, depending on the source RDBMS; 
+- data migration, even if there are a number of tools to perform this migration, depending on the source RDBMS;
 - changes needed in the source code of the application. The need for changes depends on the use of any functionalities that are specific to the existing product (like stored procedures, triggers, and non-standard functions) and the use of an abstraction layer (like Hibernate);
 - steps to guarantee equivalent functionalities and that no errors were introduced during the migration (regression tests).
 
@@ -147,8 +147,7 @@ PostgreSQL is compatible with VMWare and KVM in particular. Virtualization bring
 
 All major cloud vendors have a (or sometimes multiple) managed PostgreSQL offer. Being a managed service means that the vendor will handle the infrastructure and administrative operations and grant you restricted privileges on the instance. 
 
-Their offerings will vary vastly according to the SLA they can provide, the flavors of instances available, their use of a fully community version or a proprietary one, the list of available extensions, the hih availability / disaster recovery solutions 
-provided,...
+Their offerings will vary vastly according to the SLA they can provide, the flavors of instances available, their use of a full community version or a proprietary one, the list of available extensions, the high availability / disaster recovery solutions provided...
 
 ### Compatibility with storage technologies
 
@@ -182,7 +181,7 @@ Encryption is possible via the _pgcrypto_ module, allowing column encryption by 
 
 The traceability of events in PostgreSQL is ensured by transaction logs (called _WAL_, or Write-Ahead Logs):
 
-- logging of engine operations (starting, stopping, etc) ;
+- logging of engine operations (starting, stopping, etc);
 - access logging (queries, user access, errors, etc).
 
 ### Audit
@@ -213,7 +212,7 @@ __Resilience and Robustness (or stability)__
 
 __Cluster__
 
-> A cluster is a group of servers (or « compute farm ») sharing common storage. A cluster provides high availability and load balancing functions.
+> A cluster is a group of servers (or "compute farm") sharing common storage. A cluster provides high availability and load balancing functions.
 
 __Replication__
 
@@ -235,14 +234,14 @@ _[ Image to insert ]_
 _[ Image to insert ]_
 -->
 
-Like other DBMSs, PostgreSQL does not allow transactions on several servers in "Active-Active" or "Read/Write - Read/Write" mode. You have to go through third-party contributions, such as EDB's BDR[^18] (Bidirectionnal Replication), that offer this functionality. However, this is a proprietary development on a modified version of PostgreSQL.
+Like other DBMSs, PostgreSQL does not allow transactions on several servers in "Active-Active" or "Read/Write - Read/Write" mode. You have to go through third-party contributions, such as EDB's BDR[^18] (Bidirectional Replication), that offer this functionality. However, this is a proprietary development on a modified version of PostgreSQL.
 
 Resilience driven by the PostgreSQL engine
 ------------------------------------------
 
 PostgreSQL provides replication mechanisms for setting up an "active-passive" or "partial active-active" cluster.
 
-There are two main types of replication, namely physical replication (eg _streaming replication_ [^19] based on modification of data blocks) and logical replication (based on modification of database objects). For high availability requirements, we will focus on physical replication. Logical replication is intended for other use cases, like the selective supply of another database (e.g. datawarehouse), an upgrade with the aim of minimizing downtime, etc.
+There are two main types of replication, namely physical replication (eg _streaming replication_ [^19] based on modification of data blocks) and logical replication (based on modification of database objects). For high availability requirements, we will focus on physical replication. Logical replication is intended for other use cases, like the selective supply of another database (e.g. data warehouse), an upgrade with the aim of minimizing downtime, etc.
 
 
 Resilience driven by the storage infrastructure
@@ -289,9 +288,9 @@ The use of BLOB columns is not recommended if there is no need to search the inf
 Database schemas and structures
 -------------------------------
 
-Table partitioning is implemented as standard[^22]. It is worth noting a significant improvement with V10, which allows declarative partitioning. It was previously achieved through to the notion of inheritance and the writing of triggers. Version 11 continues the improvements, in particular on the possibility of having primary/foreign keys on the partitions, partition-pruning, the ability to define a default partition, etc.
+Table partitioning is implemented as standard[^22]. It is worth noting a significant improvement with V10, which allows declarative partitioning. It was previously achieved through the notion of inheritance and the writing of triggers. Version 11 continues the improvements, in particular on the possibility of having primary/foreign keys on the partitions, partition-pruning, the ability to define a default partition, etc.
 
-Previously one would rather avoid creating more than 500/1000 partitions for a single table. With the latest versions that have brought very appreciable performance gains in this area, this is not a relevant limit anymore.
+Previously, one would rather avoid creating more than 500/1000 partitions for a single table. With the latest versions that have brought very appreciable performance gains in this area, this is not a relevant limit anymore.
 
 Development specifics
 ---------------------
@@ -378,12 +377,12 @@ Monitoring and exploitation tools for PostgreSQL
 -----------------------------------------------
 
 ### PgAdmin
-PgAdmin is an client-server administration tool, open source an released under the PostgreSQL licence. 
-It is available on all plateforms and is included by default during a Windows installation.
-You can download it there : [https://www.pgadmin.org/download/](https://www.pgadmin.org/download/).  
+PgAdmin is an client-server administration tool, open source and released under the PostgreSQL license. 
+It is available on all platforms and is included by default during a Windows installation.
+You can download it here: [https://www.pgadmin.org/download/](https://www.pgadmin.org/download/).  
 
-As a GUI tool, it has a low entry barrier. Here are some of its most important features : 
-graphical query tool, display customization, addons ( for example PostGIS, Shapefile and DBF loader) and a script langage.
+As a GUI tool, it has a low barrier to entry. Here are some of its most important features: 
+graphical query tool, display customization, addons (for example PostGIS, Shapefile and DBF loader) and a script language.
 It can also display the query plan result (`EXPLAIN` command) in a graphical way.
 
 It can be installed in server mode to avoid installation on the client's end. This software is updated frequently.
@@ -394,8 +393,8 @@ _[ Image a insérer ]_
 
 ### psql
 
-psql tool is a command line utility, with which we can write SQL query, display database schemas, import/export data...
-It is included in all PostgreSQL distributions and we recommand it as the default client.
+psql tool is a command line utility, with which we can write SQL queries, display database schemas, import/export data...
+It is included in all PostgreSQL distributions and we recommend it as the default client.
 
 <!---
 _[ Image a insérer ]_
@@ -416,77 +415,77 @@ Many dedicated tools are available, like for example _temBoard_ and _pgwatch2_.
 Other modules can store database statistics evolution (like the highly recommended _pg\_stat\_statements_[^28], _pgtop_, ...) 
 or analyze logs (_pgBadger_[^29]).   
 
-It is important to check the health and update activity of the modules used. For example, some modules  that used to be popular like _pgFouine_, _pgstatpack_, … are not maintained anymore.
+It is important to check the health and update activity of the modules used. For example, some modules that used to be popular like _pgFouine_, _pgstatpack_, etc. are not maintained anymore.
 
 Backup 
---------------------
+------
 
-Even if PostgreSQL can natively handle hot backup, Point In Time Recovery, ... it might be 
-necessary to industrialize the backup process, either with a in-house development (very difficult) or through the use of 
+Even if PostgreSQL can natively handle hot backup, Point In Time Recovery, etc. it might be 
+necessary to industrialize the backup process, either with an in-house development (very difficult) or through the use of 
 a dedicated backup tool.
 
 Among the most advanced tools, we will highlight _Barman_ and _pgBackRest_. They provide:
 
-- easier PITR ;
-- incremental backup ;
-- a centralized backup catalog, which can come from different servers ;
+- easier PITR;
+- incremental backup;
+- a centralized backup catalog, which can come from different servers;
 - backup retention management;
-- ...
+- etc.
 
 
 High-Availability
--------------------
+-----------------
 
-Several tools exists to improve resiliency and to make administration of an group of instances easier 
-We will note for example :
+Several tools exist to improve resiliency and to make administration of an group of instances easier 
+We will note for example:
 
 - _repmgr_: facilitate the setting up of a complex architecture and ease some administrative actions 
-like failover/switchover/adding an instance...
+like failover/switchover/adding an instance/etc.
 - _Patroni_: A template to set up a high availability solution.
 It is usually used with containers and with a distributed configuration tool like _etcd_ or _Consul_.
 - _PAF_: PostgreSQL Automatic Failover is based on Pacemaker/Corosync to manage high availiblity 
-and the possibilty to switch roles in an automated way.
+and the possibility to switch roles in an automated way.
 
 
 Data migration tools to PostgreSQL
------------------------------------------------
+----------------------------------
 
 The tool [_ora2pg_](https://ora2pg.darold.net/)[^30] can analyze an Oracle database. 
 Evaluating migration costs was an additional feature required by France's DGFIP.
 The tool can also realize the migration.
 
-For data transfer, we can use an ETL (Talend Open Studio, _pgloader_[^31], ...) 
-that can apply transformations to the data during transfert (data type adaptation ...).
+For data transfer, we can use an ETL (Talend Open Studio, _pgloader_[^31], etc.) 
+that can apply transformations to the data during transfer (data type adaptation, etc.).
 For an initial load and in case of important volume, it is possible to use a tool like _pg\_bulkload_ that will 
-showcase better performance then the `COPY` command. 
+showcase better performance than the `COPY` command. 
 
 The application code must be adapted and needs to be translated in SQL instructions compatible with PostgreSQL.
 The tool _code2pg_[^32] can help by giving an estimation and ways to transform the instructions. 
 
-It is highly recommended to test the migration in the same conditions as the production's environnment
-(production database, application session logs,...).
+It is highly recommended to test the migration in the same conditions as the production's environment
+(production database, application session logs, etc).
  
 \pagebreak
 
 Decision's Help 
-==================
+===============
 
 Even if PostgreSQL can answer a lot of different use cases, some projects might be better served by 
 other technologies. This chapter will attempt to describe a decision process as it being used in several companies.
 
-PostgreSQL has a very liberal licence in its community version and there is no extra 
+PostgreSQL has a very liberal license in its community version and there is no extra 
 software cost when deploying it. If a warranty is needed, it is possible to subscribe to support on 
 either the community version or a proprietary one that will include some extra features. An often used 
 strategy within enterprises is to have a "PostgreSQL first" policy for all new projects, baring any lack of 
 functionality or vendor's requirements.
 
-Concerning migrations, their ROI might be difficult to justify and can at times be inexistant.
-It will depend on the project complexity, potential licence cost savings, ...
-It may be simplier to  have a application upgrade and a database migration at the same time. 
+Concerning migrations, their ROI might be difficult to justify and can at times be nonexistent.
+It will depend on the project complexity, potential license cost savings, etc.
+It may be simpler to have an application upgrade and a database migration at the same time. 
 Even if PostgreSQL is recognized as a very capable RDBMS on small to medium sized databases, it can also 
 handle databases of dozens or hundreds of terabytes.
 
-The table below will be list :
+The table below will list:
 
 - features;
 - native support (starting from which version) or with which extension (and its version);
@@ -495,33 +494,33 @@ The table below will be list :
 
 | Features | Availability | Comments - Limits |
 |-----------------|-------------|:----------------------:|
-|Connection pooler | with pgpool/pgbouncer ... | see § 7.4.3|
+|Connection pooler | with Pgpool-II/PgBouncer ... | see § 7.4.3|
 |Master-standby replication without load-balancer | 9.0 + | see § 6.1 |
-|High availibility with automatic failover and connection routing| with Patroni/repmgr modules... | see § 8.4 |
+|High availability with automatic failover and connection routing| with Patroni/repmgr modules... | see § 8.4 |
 |Encrypting data | with pgcrypto extension (8.3 +) | see § 4.3 |
 |Actvity audit | with plugin pgaudit (9.5 +) |see § 5.2.4 |
-|NoSQL | json (9.2+)| see § 4.1 |
+|NoSQL | JSON (9.2+)| see § 4.1 |
 |Materialized views | 9.3 +  | see § 7.3 |
 |Declarative table partioning | 10 + | see § 7.2/12.1.4 |
 |LOBs management | 7.2+ | |
-|Spatial data | with Postgis | see § 4.1/7.1/12.5 |
-|Monitoring and supervision | with temboard/pgwatch2/... | |
+|Spatial data | with PostGIS | see § 4.1/7.1/12.5 |
+|Monitoring and supervision | with temBoard/pgwatch2/... | |
 |UPSERT | 9.5 +| |
 |Autonomous transactions | with plugin pg_background|
 |Indexes | | | | |
 |Maintenance and data loading tools… | 7.2+ (Vacuum) 7.1+ (Copy) | | | |
 |auto-explain  | with auto_explain extension| |
 |Full-text search | 8.3 +| |
-|Storage, backup externalisation | pg_basebackup or with Barman/pgBackRest/... | see § 5.1.5/6.3/8.3 |
+|Storage, backup externalization | pg_basebackup or with Barman/pgBackRest/... | see § 5.1.5/6.3/8.3 |
 
 
 
 Limits or unsupported features 
-=============================================
+==============================
 
-This paragraph lists some unsupported features in the community version. This is of course not a comprenhensive list.
+This paragraph lists some unsupported features in the community version. This is of course not a comprehensive list.
 
-- Instance level encryptiin;
+- Instance level encryption;
 - Master-master clusters ;
 - Advanced compression ;
 - History snapshot of statistics;
@@ -531,16 +530,16 @@ Regarding SQL compliance, a list is available on https://www.postgresql.org/docs
 \pagebreak
 
 Change management
-======================
+=================
 
-Switching to another DBMS is a project on its own and depending on the scope, can become an enterprise level project. It might therefore require managemenent's involvement to be successful.
+Switching to another DBMS is a project on its own and, depending on the scope, can become an enterprise level project. It might therefore require management's involvement to be successful.
 
 Training
----------------------
+--------
 
-Training sessions can focus on these audiences :
+Training sessions can focus on these audiences:
 
-- developers : getting started and PostgreSQL migrations;
+- developers: getting started and PostgreSQL migrations;
 - architect and operators : installation, maintenance, backup, monitoring ...;
 - advanced administrators (DBA) : ops training.
 
@@ -557,14 +556,14 @@ There are many ways to get support within the PostgreSQL community:
 Professional support is also possible, we will refer the reader to the support page[^33].
 
 Migration plan
------------------
+--------------
 
 A migration will be a more or less important adaptation of the application. 
-Regression and performance testing will have to be conducted and the migration cost might be significant.
+Regression and performance testing will have to be conducted, and the migration cost might be significant.
 
 Whenever the migration can be conducted at the same time as a major functional evolution, this cost can be lowered. 
 Functional testing and technical tests would have had to be conducted, no matter the underlying RDBMS. 
-This has to be balanced by the fact that there are risks at managing two migrations simultaneously.
+This has to be balanced by the fact that there are risks in managing two migrations simultaneously.
 
 
 Project management (both on the business and technical part) and ops support for skill improvement 
@@ -573,31 +572,31 @@ will have to be planned.
 \pagebreak
 
 Return on investment
-=========================
+====================
 
 Database migration cost
-----------------------------
+-----------------------
 
-A migration to a new DBMS will have to address the following points :
+A migration to a new DBMS will have to address the following points:
 
-- entry cost (training, raising the level of competencies,... );
-- application ajustement including test costs (technical, functional and non regression test);
+- entry cost (training, raising the level of competencies, etc);
+- application adjustement including test costs (technical, functional and non regression test);
 - any renewal of the support market;
 - the upgrade of the operating procedures.
 
-Possesion cost
-------------------
+Possession cost
+---------------
 
-PostgreSQL is under an open source license[^34] similar to the BSD or MIT ones.
+PostgreSQL is under an open-source license[^34] similar to the BSD or MIT ones.
 So there is no pricing policy from an editor that the project must undergo.
 
 Control of trajectories
--------------------------
+-----------------------
 
 PostgreSQL's roadmap is known and controlled.
 
 The PostgreSQL's ecosystem keeps on growing with new plugins and new tools.
-Commercial software offers more and more interfaces and api to use PostgreSQL.
+Commercial software offers more and more interfaces and API to use PostgreSQL.
 
 Its community is both important and active. To take a French example, the reader can 
 have a look at the mailing list[^35] and the forum[^36]. 
@@ -621,16 +620,16 @@ You must be aware of the elements of the source servers to be able to define the
 
 ### Technical environment
 
-Characteristics of the Oracle servers :
+Characteristics of the Oracle servers:
 
-Check the type of servers : dedicated, shared or virtualized?
+Check the type of servers: dedicated, shared or virtualized?
 
-Check the following technical elements :
+Check the following technical elements:
 
-- Types of processors ;
-- Number of processors ;
-- Processor clock speeds ;
-- Register size ;
+- Types of processors;
+- Number of processors;
+- Processor clock speeds;
+- Register size;
 - RAM size.
 
 ### Software stack
@@ -674,7 +673,7 @@ Since PostgreSQL 9.3, materialized views are a built-in feature.
 
 __The language of SQL procedures__
 
-Oracle uses PL/SQL and PostgreSQL uses PL/pgSQL ; they are quite similar but some adaptation is required.
+Oracle uses PL/SQL and PostgreSQL uses PL/pgSQL; they are quite similar, but some adaptation is required.
 
 __Model for data type mapping__
 
@@ -698,7 +697,7 @@ __Generation of database migration scripts__
 
 It is usually a good idea to separate DDL instructions and the data loading instructions. This is also the approach taken by tools like _ora2pg_. First the database will be initialized with the structure script, then data will be loaded at a later time. This first script (or set of scripts) will include the data structures as well as the procedures and functions that have been re-adapted for PostgreSQL.
 
-Please keep in mind that to speedup the loading part, it might be preferable to create (some) indexes / constraints after the inital load. 
+Please keep in mind that to speed up the loading part, it might be preferable to create (some) indexes / constraints after the initial load. 
 
 __Data migration__
 
@@ -712,7 +711,7 @@ Code modification is necessary to integrate the PostgreSQL driver for managing t
 
 ### Criticality and backups
 
-Consider the concepts of Disaster Recovery, Busines Continuity, RTO, RPO, and replication.
+Consider the concepts of Disaster Recovery, Business Continuity, RTO, RPO, and replication.
 
 Which technical solution is used to ensure high availability: Oracle RAC, Oracle DATAGUARD, or something else?
 
@@ -726,16 +725,16 @@ Physical restores do not have a partial granularity in PostgreSQL (the whole ins
 
 ### Monitoring, performance improvement and supervision
 
-There is no global monitoring like Grid Control in Oracle. It is however possible to use Nagios with the plugin _check\_postgres_[^37]. Other tools are also available ( _PGObserver_, _pgwatch2_, _temBoard_, _PoWa_, etc...).
+There is no global monitoring like Grid Control in Oracle. It is however possible to use Nagios with the plugin _check\_postgres_[^37]. Other tools are also available (_PGObserver_, _pgwatch2_, _temBoard_, _PoWa_, etc).
 
 \pagebreak
 
 Migration from Db2
 ------------------
 
-A migration leads to a review of the DDL from Db2: it is recommended to provide a tool for transforming (scripting) the DDL, taking into account the elements described below.  Regarding the DCL, it is preferable not to try to transpose the Db2 grants to PostgreSQL, as the authorisation levels are very different.
+A migration leads to a review of the DDL from Db2: it is recommended to provide a tool for transforming (scripting) the DDL, taking into account the elements described below.  Regarding the DCL, it is preferable not to try to transpose the Db2 grants to PostgreSQL, as the authorization levels are very different.
 
-The maintenance procedures (backups, history, defragmentation, statistics collection , obsolete files cleaning, etc.) are naturally different and will have to be adapted.
+The maintenance procedures (backups, history, defragmentation, statistics collection, obsolete files cleaning, etc.) are naturally different and will have to be adapted.
 
 ### Some DDL differences between PostgreSQL and Db2
 
@@ -770,7 +769,7 @@ Kindly note that the use of tablespaces in PostgreSQL is not as common/relevant 
 
  
 - Creating a table:
-    Some keywords are not recognized by PostgreSQL, so remove them from the Db2 DDL before migration. Example: _APPEND_, _WITH RESTRICT ON DROP_, and _LONG IN_, all to do with table partioning, are defined differently in PostgreSQL.
+    Some keywords are not recognized by PostgreSQL, so remove them from the Db2 DDL before migration. Example: _APPEND_, _WITH RESTRICT ON DROP_, and _LONG IN_, all to do with table partitioning, are defined differently in PostgreSQL.
 
 - Automatic increment of a column counter on table creation: Db2 autoincrement (_[GENERATED ALWAYS | GENERATED BY DEFAULT] AS IDENTITY_) is now supported as of PostgreSQL v12. In earlier versions, you have to use sequences.
 
@@ -898,7 +897,7 @@ Not only is the precision of timestamp formats different, but the separator betw
 
 - Loading utility:  
   A Db2 table can be loaded by _import_, _load_, _ingest_ ou _db2move_.  
-  PostgreSQL exclusively uses the _copy_ utility which is much less feature rich than the Db2 utilities. Partial loading of a table is only possible since V12, with the introduction of a WHERE clause.
+  PostgreSQL exclusively uses the _copy_ utility, which is much less feature rich than the Db2 utilities. Partial loading of a table is only possible since V12, with the introduction of a WHERE clause.
 
 - Other Db2/PostgreSQL utilities:  
   _reorg_ becomes _vacuum_  
@@ -907,7 +906,7 @@ Not only is the precision of timestamp formats different, but the separator betw
 
 - Double quote character:
 
-During the migration, beware of the double quote character ": it is the default string delimiter in Db2 when exporting data so it is found in the unloaded (export) file, surrounding each string. By default, when loading to PostgreSQL these double quote characters will be loaded into the table if they are present in the data file. To avoid this, files exported from Db2 should be in `DEL` (ASCII) mode and imported into PostgreSQL as csv via the WITH CSV delimiter ',' QUOTE '"' parameters of copy.
+During the migration, beware of the double quote character ": it is the default string delimiter in Db2 when exporting data, so it is found in the unloaded (export) file, surrounding each string. By default, when loading to PostgreSQL these double quote characters will be loaded into the table if they are present in the data file. To avoid this, files exported from Db2 should be in `DEL` (ASCII) mode and imported into PostgreSQL as CSV via the WITH CSV delimiter ',' QUOTE '"' parameters of copy.
 
 - Transaction logs:  
   Db2: each database has its own logs.  
@@ -1016,7 +1015,7 @@ Some risks that can be identified:
 Migration from MSSQL
 --------------------
 
-Some opensource tools that can help facilitate the data migration are:
+Some open-source tools that can help facilitate the data migration are:
 
 - <https://github.com/dalibo/sqlserver2pgsql>;
 - <http://pgloader.io/>.
@@ -1030,7 +1029,7 @@ A very different approach was taken by <https://babelfishpg.org/>. This PostgreS
 Some references
 ---------------
 
-Some published examples of organisations deploying and managing PostgreSQL instances at scale:
+Some published examples of organizations deploying and managing PostgreSQL instances at scale:
 
 __GitLab__ <https://about.gitlab.com/blog/2020/09/11/gitlab-pg-upgrade>
 Data volume: > 6 TB;
@@ -1068,7 +1067,7 @@ The table below shows some plugins mentioned in this document:
  name               | function
 --------------------|-----------------------
 auto_explain        | Explain plans in the logs
-PostGIS             | Spatial and geograghic
+PostGIS             | Spatial and geographic
 PGAudit             | Audit
 pg_repack           | Table reorganization (bloat removal)
 pg_stat_statements  | Statistics
@@ -1090,8 +1089,8 @@ Barman          | Backup / restore
 check_postgres  | Monitoring
 code2pg         | Migration tool
 ora2pg          | Migration tool
-PAF             | High availibility
-Patroni         | High availibility
+PAF             | High availability
+Patroni         | High availability
 PgAdmin         | GUI
 pgBackRest      | Backup / restore
 pgBadger        | Log analysis
@@ -1101,7 +1100,7 @@ Pgpool-II       | Connection pool management
 pgtop           | Statistics
 pgwatch2        | Monitoring
 pitrery         | Backup / restore
-repmgr          | High availibility
+repmgr          | High availability
 temBoard        | Monitoring
 
 \pagebreak
@@ -1194,7 +1193,7 @@ Documentation in French:
 
 [^33]: Support: <https://www.postgresql.org/support/professional_support/europe/>
 
-[^34]: Licence: <https://www.postgresql.org/about/licence/>
+[^34]: License: <https://www.postgresql.org/about/licence/>
 
 [^35]: Mailing lists: <https://www.postgresql.org/list/>
 
